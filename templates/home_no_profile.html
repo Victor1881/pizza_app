@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block start %}
+
+     <link rel="stylesheet" media="screen" href="{% static 'css/s.css' %}">
+
+<div class="container">
+        {% if not request.user.is_authenticate %}
+        <div class="container">
+    		<div class="row justify-content-center mb-5 pb-3">
+          <div class="col-md-7 heading-section ftco-animate text-center">
+            <h2 class="mb-4" style="color: rebeccapurple">You need account :(</h2>
+            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+          </div>
+        </div>
+    	</div>
+    	<div class="container-wrap">
+    		<div class="row">
+                {% for p in pizza %}
+                     <div class="col-lg-3 d-flex ftco-animate">
+                             <div class="card product-card shadow border pb-1"><a class="d-block" href="#quick-view" data-toggle="modal"><img
+                                class="card-img-top" src="{{ p.photo.url }}" alt="Pizza"></a>
+
+                                <div class="text p-4">
+                                    <h3>{{ p.pizza_name }}</h3>
+                                    {% if not p.sauce %}
+                                        <p>{{ p.products }}</p>
+                                    {% else %}
+                                        <p>{{ p.sauce }}, {{ p.products }}</p>
+                                    {% endif %}
+                                    <p>(30cm)</p>
+                                    <p class="price"><span>${{ p.price }}</span>
+                                    <button class="btn btn-outline-secondary">Order</button><p>
+
+                                </div>
+                            </div>
+                     </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

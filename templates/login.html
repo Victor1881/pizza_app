@@ -1,0 +1,47 @@
+{% load crispy_forms_filters %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Pizza App</title>
+    </title>
+    <!-- Viewport-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon and Touch Icons-->
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Vendor Styles including: Font Icons, Plugins, etc.-->
+    <link rel="stylesheet" media="screen" href="{% static 'vendor/simplebar/dist/simplebar.min.css' %}" />
+    <link rel="stylesheet" media="screen" href="{% static 'vendor/tiny-slider/dist/tiny-slider/css' %}" />
+    <!-- Main Theme Styles + Bootstrap-->
+</head>
+<!-- Body-->
+    <link rel="stylesheet" media="screen" href="{% static 'css/theme.min.css' %}">
+<a class="right-column" href="{% url 'login' %}" style="min-width: 7rem;">
+    <div style="position: absolute; top: 0; right: 0; width: 200px; text-align:right;">
+      <font size="+2"><b>Pizza</b></font>
+    </div>
+</a>
+    <div style="text-align: left;">
+        <link rel="stylesheet" href="{% static 'css/register.css' %}"/>
+            <div class="form-body">
+                <div class="row">
+                    <div class="form-holder">
+                        <div class="form-content">
+                            <div class="form-items">
+                                <h3>Login</h3>
+                                <form class="requires-validation" novalidate method="post" action="{% url 'login' %}">
+                                    {% csrf_token %}
+                                    {{ form }}
+
+                                    <div class="form-button mt-3">
+                                        <button id="submit" type="submit" class="btn btn-primary">Login</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>

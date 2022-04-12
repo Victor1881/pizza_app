@@ -1,0 +1,44 @@
+.box-element{
+    box-shadow:hsL(0, 0%, 80%) 0 0 16px;
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+.order-row{
+    display: flex;
+    align-items: self-start;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ececec;
+}
+
+h5{
+    color: black;
+}
+
+.row-image{
+    width: 100px;
+}
+
+.quantity{
+    display: inline-block;
+    font-weight: 100;
+    padding-right: 10px;
+}
+
+.chg-quantity{
+    width: 10px;
+    cursor: pointer;
+    display: block;
+    margin-top: 5px;
+    transition: 1s;
+}
+
+.chg-quantity:hover{
+    opacity: .6;
+}
+
+#left-t {
+  margin-left: 100px;
+}

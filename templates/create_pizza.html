@@ -1,0 +1,78 @@
+{% load static %}
+{% load crispy_forms_filters %}
+<head>
+    <meta charset="utf-8">
+    <title>Pizza App</title>
+    </title>
+    <!-- Viewport-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon and Touch Icons-->
+    <link rel="mask-icon" color="#fe6a6a" href="safari-pinned-tab.svg">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Vendor Styles including: Font Icons, Plugins, etc.-->
+{#    <link rel="stylesheet" media="screen" href="{% static 'vendor/simplebar/dist/simplebar.min.css' %}" />#}
+{#    <link rel="stylesheet" media="screen" href="{% static 'vendor/tiny-slider/dist/tiny-slider/css' %}" />#}
+    <!-- Main Theme Styles + Bootstrap-->
+    <link rel="stylesheet" media="screen" href="{% static 'css/theme.css' %}">
+    <link rel="stylesheet" media="screen" href="{% static 'css/new_style.css' %}">
+</head>
+<!-- Body-->
+
+
+<div class="wrapper">
+    <div class="multi_color_border"></div>
+    <div class="top_nav">
+        <div class="left">
+          <div class="logo"><p><span>Pizza</span>App</p></div>
+      </div>
+      <div class="right">
+        <ul>
+            {% if not request.user.is_authenticated  %}
+              <li><a href="{% url 'login' %}">LogIn</a></li>
+              <li><a href="{% url 'register' %}">SignUp</a></li>
+            {% endif %}
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'home' %}">Profile</a></li>
+            <li><a href="{% url 'orders' %}">Orders</a></li>
+        </ul>
+      </div>
+    </div>
+
+</div>
+        <div style="text-align: center;">
+        <link rel="stylesheet" href="{% static 'css/home_no_profile.css' %}"/>
+            <div class="form-body"><div id="bg">
+{#                <img  src="{% static 'fonts/istockphoto-917379650-170667a.jpg' %}" width="1400"#}
+{#                     height="500" alt="">#}
+                <div class="row">
+                    <div class="form-holder">
+                        <div class="form-content">
+                            <div class="form-items">
+                                <h3>Create Pizza</h3>
+                                <form class="requires-validation" novalidate method="post" action="{% url 'create pizza' %}">
+                                    {% csrf_token %}
+
+                                    {{ form.pizza_name }}
+                                    Sauces: {{ form.sauce }}
+                                    Cheese: {{ form.cheese }}
+                                    <p>Suggestions: mozzarella, gorgonzola, cheddar, parmesan, ricotta, stracchino</p>
+                                    Meat: {{ form.meat }}
+                                    <p>Suggestions: pepperoni, chicken, prosciutto, ham, bacon, sausage</p>
+                                    Additional: {{ form.additional }}
+                                    <p>Suggestions: tomatoes, olives, corn, pineapple, mushrooms, arugula, artichoke, pickled cucumbers</p>
+
+                                     <div class="form-group col-md-5 mb-0" style="right: 20px">
+                                         {{ form.price|as_crispy_field }}
+                                     </div>
+                                    <div class="form-button mt-3">
+                                        <button id="submit" type="submit" class="btn btn-primary">Create</button>
+                                    </div>
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
