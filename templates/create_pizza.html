@@ -54,7 +54,7 @@
                                     {% csrf_token %}
 
                                     {{ form.pizza_name }}
-                                    Sauces: {{ form.sauce }}
+                                    Sauces: {{ form.sauce }}{{ form.field.error }}
                                     Cheese: {{ form.cheese }}
                                     <p>Suggestions: mozzarella, gorgonzola, cheddar, parmesan, ricotta, stracchino</p>
                                     Meat: {{ form.meat }}

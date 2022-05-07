@@ -1,3 +1,10 @@
+@charset "utf-8";
+
+.wrapper{
+    width: 1170px;
+    margin: auto;
+}
+
 body{
     margin: 0;
     font-size: .9rem;
@@ -5,8 +12,9 @@ body{
     line-height: 1.6;
     color: #212529;
     text-align: left;
-    background-image: url("../image/921925e6-be6e-4418-8de6-c3c8f735d560.jpeg");
+    background: url("../image/921925e6-be6e-4418-8de6-c3c8f735d560.jpeg");
     background-size: cover;
+    position: relative;
 }
 
 .form-holder {

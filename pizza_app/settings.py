@@ -83,6 +83,9 @@ DATABASES = {
         'PASSWORD': 'mysecretpassword',
         'HOST': '127.0.0.1',
         'PORT': '5432',
+        'TEST': {
+            'NAME': 'mytestdatabase',
+        }
     }
 }
 
@@ -149,5 +152,7 @@ LOGGING = {
         }
     }
 }
+
+LOGOUT_REDIRECT_URL = 'home'
 
 AUTH_USER_MODEL = 'accounts.ProfileUser'

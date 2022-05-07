@@ -9,3 +9,4 @@ urlpatterns = [
     path('', include('pizza_app.home.urls')),
     path('accounts/', include('pizza_app.accounts.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

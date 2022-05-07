@@ -1,0 +1,72 @@
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <title>Pizza App</title>
+    </title>
+    <!-- Viewport-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon and Touch Icons-->
+    <link rel="mask-icon" color="#fe6a6a" href="safari-pinned-tab.svg">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Vendor Styles including: Font Icons, Plugins, etc.-->
+{#    <link rel="stylesheet" media="screen" href="{% static 'vendor/simplebar/dist/simplebar.min.css' %}" />#}
+{#    <link rel="stylesheet" media="screen" href="{% static 'vendor/tiny-slider/dist/tiny-slider/css' %}" />#}
+    <!-- Main Theme Styles + Bootstrap-->
+    <link rel="stylesheet" media="screen" href="{% static 'css/theme.css' %}">
+    <link rel="stylesheet" media="screen" href="{% static 'css/s.css' %}">
+    <link rel="stylesheet" media="screen" href="{% static 'css/profile_details.css' %}">
+</head>
+<!-- Body-->
+
+
+<div class="wrapper">
+    <div class="multi_color_border"></div>
+    <div class="top_nav">
+        <div class="left">
+          <div class="logo"><p><span>Pizza</span>App</p></div>
+      </div>
+      <div class="right">
+      </div>
+    </div>
+{#    <div class="bottom_nav">#}
+{#      <ul>#}
+{#          {% if request.user.is_authenticated  %}#}
+{#            <li><a href="{% url 'create pizza' %}">Create Pizza</a></li>#}
+{#            <li><a style="flex: 1" href="{% url 'drink' %}">Drinks</a></li>#}
+{#            <li><a href="{% url 'total orders' %}">My orders</a></li>#}
+{##}
+{#          {% endif %}#}
+{#      </ul>#}
+{#  </div>#}
+{##}
+{#  <div class="banner">#}
+{#    <img src="" alt="banner_img">#}
+{#  </div>#}
+</div>
+<br>
+
+<div style="text-align: left;">
+        <link rel="stylesheet" href="{% static 'css/change_password.css' %}"/>
+            <div class="form-body">
+                <div class="row">
+                    <div class="form-holder">
+                        <div class="form-content">
+                            <div class="form-items">
+                                <h3>Are you sure you want to delete your profile?</h3>
+                                {% if is_owner %}
+                                    <form class="requires-validation" method="post" action="{% url 'delete profile' profile.id %}">
+                                        {% csrf_token %}
+                                        {{ form }}
+                                        <div class="m-2">
+                                            <a class="btn btn-primary" style="float: left" href="javascript:history.back()">No, go back</a>
+                                            <button id="submit" type="submit" style="float: right" class="btn btn-primary">Delete</button>
+                                        </div>
+                                    </form>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>

@@ -38,3 +38,6 @@
 #left-t {
   margin-left: 100px;
 }
+
+.hide { display: none; }
+#identify { padding: 10px; }

@@ -16,12 +16,23 @@
     <link rel="stylesheet" media="screen" href="{% static 'vendor/tiny-slider/dist/tiny-slider/css' %}" />
     <!-- Main Theme Styles + Bootstrap-->
     <link rel="stylesheet" media="screen" href="{% static 'css/theme.min.css' %}">
+     <style type="text/css">
+        #logo {
+          display: inline-block;
+          margin: 15px; /* margin: 20px was off */
+          float: right;
+          height: 60px;
+          width: auto; /* correct proportions to specified height */
+          border-radius: 80%; /* makes it a circle */
+            position: relative;
+        }
+         </style>
 </head>
 <!-- Body-->
 
 <a class="right-column" href="{% url 'register' %}" style="min-width: 7rem;">
     <div style="position: absolute; top: 0; right: 0; width: 200px; text-align:right;">
-      <font size="+2"><b>Pizza</b></font>
+      <font size="+2"><a href="{% url 'register' %}"><img id=logo src="{% static '../fonts/logo-slice-of-pizza-and-ribbon-vector-4189992.jpg' %}"></a></font>
     </div>
 </a>
 

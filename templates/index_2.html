@@ -1,0 +1,107 @@
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <title>Pizza App</title>
+    </title>
+    <!-- Viewport-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon and Touch Icons-->
+    <link rel="mask-icon" color="#fe6a6a" href="safari-pinned-tab.svg">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Vendor Styles including: Font Icons, Plugins, etc.-->
+{#    <link rel="stylesheet" media="screen" href="{% static 'vendor/simplebar/dist/simplebar.min.css' %}" />#}
+{#    <link rel="stylesheet" media="screen" href="{% static 'vendor/tiny-slider/dist/tiny-slider/css' %}" />#}
+    <!-- Main Theme Styles + Bootstrap-->
+    <link rel="stylesheet" media="screen" href="{% static 'css/theme.css' %}">
+    <link rel="stylesheet" media="screen" href="{% static 'css/s.css' %}">
+    <script type="text/javascript">
+        const user = {{ request.user.id }}
+
+        function getToken(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        const csrftoken = getToken('csrftoken');
+    </script>
+</head>
+{#<!-- Body-->#}
+{##}
+{##}
+{#<div class="wrapper">#}
+{#    <div class="multi_color_border"></div>#}
+{#    <div class="top_nav">#}
+{#        <div class="left">#}
+{#          <div class="logo"><p><span>Pizza</span>App</p></div>#}
+{#      </div>#}
+{#      <div class="right">#}
+{#        <ul>#}
+{#            {% if request.user.is_authenticated  %}#}
+{#                <li><a href="{% url 'home' %}">Home</a></li>#}
+{#                <li><a href="{% url 'profile' request.user.id %}">Profile</a></li>#}
+{#                <li><a href="{% url 'orders' %}">Orders</a></li>#}
+{#            {% else %}#}
+{#              <li><a href="{% url 'login' %}">Login</a></li>#}
+{#              <li><a href="{% url 'register' %}">SignUp</a></li>#}
+{#            {% endif %}#}
+{#        </ul>#}
+{#      </div>#}
+{#    </div>#}
+{#    <div class="bottom_nav">#}
+{#      <ul>#}
+{#          {% if request.user.is_authenticated  %}#}
+{#            <li><a href="{% url 'create pizza' %}">Create Pizza</a></li>#}
+{#            <li><a style="flex: 1" href="{% url 'drink' %}">Drinks</a></li>#}
+{#            <li><a href="{% url 'total orders' %}">My orders</a></li>#}
+{##}
+{#          {% endif %}#}
+{#      </ul>#}
+{#  </div>#}
+
+{#  <div class="banner">#}
+{#    <img src="" alt="banner_img">#}
+{#  </div>#}
+{#</div>#}
+
+{#<br>#}
+{% block start %}
+
+
+{% endblock %}
+
+<div class="mt-5 pt-5">
+<footer class="p-4 footer text-center mt-5 pt-5" style="background-color: darkred">
+    <p class="text-white">Pizza App</p>
+</footer>
+</div>
+
+
+
+
+
+
+
+<style>
+    footer {
+        /* position: absolute; */
+   bottom: 0;
+   width: 100%;
+}
+</style>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script type="text/javascript" src="{% static 'js/pizza.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/drink.js' %}"></script>

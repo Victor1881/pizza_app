@@ -1,0 +1,85 @@
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <title>Pizza App</title>
+    </title>
+    <!-- Viewport-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon and Touch Icons-->
+    <link rel="mask-icon" color="#fe6a6a" href="safari-pinned-tab.svg">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Vendor Styles including: Font Icons, Plugins, etc.-->
+{#    <link rel="stylesheet" media="screen" href="{% static 'vendor/simplebar/dist/simplebar.min.css' %}" />#}
+{#    <link rel="stylesheet" media="screen" href="{% static 'vendor/tiny-slider/dist/tiny-slider/css' %}" />#}
+    <!-- Main Theme Styles + Bootstrap-->
+    <link rel="stylesheet" media="screen" href="{% static 'css/theme.css' %}">
+    <link rel="stylesheet" media="screen" href="{% static 'css/s.css' %}">
+</head>
+
+
+<div class="wrapper">
+    <div class="multi_color_border"></div>
+    <div class="top_nav">
+        <div class="left">
+          <div class="logo"><p><span>Pizza</span>App</p></div>
+      </div>
+      <div class="right">
+        <ul>
+            {% if request.user.is_authenticated  %}
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'profile' request.user.id %}">Profile</a></li>
+                <li><a href="{% url 'orders' %}">Orders</a></li>
+            {% else %}
+              <li><a href="{% url 'login' %}">Login</a></li>
+              <li><a href="{% url 'register' %}">SignUp</a></li>
+            {% endif %}
+        </ul>
+      </div>
+    </div>
+  </div>
+{##}
+{#  <div class="banner">#}
+{#    <img src="" alt="banner_img">#}
+{#  </div>#}
+</div>
+
+<br>
+
+    <div class="row">
+    <link rel="stylesheet" media="screen" href="{% static 'css/login.css' %}">
+        <div class="col-lg-12">
+            <div class="box-element">
+                <a href="{% url 'home' %}">&#x2190;Back</a>
+                <br>
+                <br>
+
+                <table class="table">
+                </table>
+            </div>
+            <br>
+            <div class="box-element">
+                <div class="order-row">
+                    <div style="flex:2"></div>
+                    <div style="flex:2">Order id</div>
+                    <div style="flex:2">Total</div>
+                    <div style="flex:1"></div>
+                </div>
+                {% spaceless %}
+                {% for item in orders %}
+                        <div class="order-row">
+                            <div style="flex:2"><img class="row-image" src="{% static '../fonts/logo-slice-of-pizza-and-ribbon-vector-4189992.jpg' %}"></div>
+                            <div style="flex:2">{{ item.order_number }}</div>
+    {#                        <div style="flex:1">{{ item.date_added }}</div>#}
+                            <div style="flex:2">${{ item.total }}</div>
+                            <div style="flex:1"> <a href="{% url 'order id' item.id %}" class="btn btn-success">Details</a></div>
+
+                        </div>
+                {% endfor %}
+                {% endspaceless %}
+            </div>
+        </div>
+    </div>
+
+<!-- Body-->
+

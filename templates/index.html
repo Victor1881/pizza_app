@@ -1,11 +1,145 @@
-{% extends "base.html" %}
+{% extends "index_2.html" %}
 {% load static %}
 {% block start %}
+<head>
+
+     <title>Eatery Cafe and Restaurant Template</title>
+<!--
+
+Eatery Cafe Template
+
+http://www.templatemo.com/tm-515-eatery
+
+-->
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+     <meta name="description" content="">
+     <meta name="keywords" content="">
+     <meta name="author" content="">
+     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+     <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+     <link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}">
+     <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+     <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+     <link rel="stylesheet" media="screen" href="{% static 'css/s.css' %}">
+
+     <!-- MAIN CSS -->
+     <link rel="stylesheet" href="{% static 'css/templatemo-style.css' %}">
+
+      <style>
+    /* Stackoverflow preview fix, please ignore */
+    .navbar-nav {
+      flex-direction: row;
+        position: relative;
+        top: -20px;
+    }
+  </style>
+
+</head>
+<body>
+
+     <!-- PRE LOADER -->
+     <section class="preloader">
+          <div class="spinner">
+
+               <span class="spinner-rotate"></span>
+
+          </div>
+     </section>
 
 
- <link rel="stylesheet" media="screen" href="{% static 'css/s.css' %}">
+     <!-- MENU -->
+     <section class="navbar custom-navbar navbar-fixed-top" role="navigation" style="height: 70px">
+          <div class="container" style="height: 0">
 
+               <div class="navbar-header" style="height: 0">
+                    <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                         <span class="icon icon-bar"></span>
+                         <span class="icon icon-bar"></span>
+                         <span class="icon icon-bar"></span>
+                    </button>
+
+                    <!-- lOGO TEXT HERE -->
+                    <a href="{% url 'home' %}" class="navbar-brand" style=" float: left; position: relative; top: -20px">Pizza <span></span> App</a>
+               </div>
+
+               <!-- MENU LINKS -->
+               <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-nav-first">
+                         <li><a href="{% url 'home' %}" class="smoothScroll">Home</a></li>
+                        {% if request.user.is_authenticated %}
+                             <li><a href="{% url 'profile' request.user.id %}" class="smoothScroll">Profile</a></li>
+                             <li><a href="{% url 'orders' %}" class="smoothScroll">Orders</a></li>
+                             <li><a class="smoothScroll"></a></li>
+                             <li><a style="left: 400px" href="{% url 'total orders' %}" class="smoothScroll">My Orders</a></li>
+                        {% else %}
+                              <li><a href="{% url 'login' %}">Login</a></li>
+                              <li><a href="{% url 'register' %}">SignUp</a></li>
+                        {% endif %}
+                    </ul>
+
+               </div>
+          </div>
+     </section>
+
+
+     <!-- HOME -->
+     <section id="home" class="slider" data-stellar-background-ratio="0.5">
+          <div class="row">
+
+                 <div class="owl-carousel owl-theme" style="background-image: url('../static/image/120733271-heart-shaped-pizza-with-meat-and-vegetables-food-concept-of-romantic-love-for-valentines-day-_ml_resize_x4_toned.jpg'); background-size: cover">
+                         <div class="item item-first">
+                              <div class="caption">
+                                   <div class="container">
+                                        <div class="col-md-8 col-sm-12">
+{#                                             <h3>Do you want</h3>#}
+                                             <h1>Create your pizza</h1>
+                                            {% if request.user.is_authenticated %}
+                                             <a href="{% url 'create pizza' %}" class="section-btn btn btn-default smoothScroll" style="background-color: darkorange">Create Pizza</a>
+                                            {% endif %}
+                                        </div>
+                                   </div>
+                              </div>
+                         </div>
+
+                         <div class="item item-second" style="background-image: url('../static/image/coke.jpg')">
+                              <div class="caption">
+                                   <div class="container">
+                                        <div class="col-md-8 col-sm-12">
+                                             <h3>Order Drink From here</h3>
+                                             <h1>Order drink from here</h1>
+                                             {% if request.user.is_authenticated %}
+                                                <a href="{% url 'drink' %}" class="section-btn btn btn-default smoothScroll">Drinks</a>
+                                             {% endif %}
+                                        </div>
+                                   </div>
+                              </div>
+                         </div>
+                    </div>
+
+          </div>
+     </section>
+
+
+
+     <!-- SCRIPTS -->
+     <script src="{% static 'js/jquery.js' %}"></script>
+     <script src="{% static 'js/bootstrap.min.js' %}"></script>
+     <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+     <script src="{% static 'js/wow.min.js' %}"></script>
+     <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+     <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+     <script src="{% static 'js/smoothscroll.js' %}"></script>
+     <script src="{% static 'js/custom.js' %}"></script>
+
+</body>
+
+    <br>
 <div class="container">
+
 
     {% if request.user.is_authenticated %}
     	<div class="container">
@@ -79,24 +213,5 @@
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js" integrity="sha512-DZqqY3PiOvTP9HkjIWgjO6ouCbq+dxqWoJZ/Q+zPYNHmlnI2dQnbJ5bxAHpAMw+LXRm4D72EIRXzvcHQtE8/VQ==" crossorigin="anonymous"></script>
-{#<script>#}
-{##}
-{#var uptadeDrink = document.getElementsByClassName('update-cart')#}
-{##}
-{##}
-{#for(var i = 0; i < updateBtns.length; i++){#}
-{#    updateBtns[i].addEventListener('click', function (){#}
-{#        var pId = this.dataset.p#}
-{#        var action = this.dataset.action#}
-{#        console.log('pId:', pId, 'action:', action)#}
-{##}
-{#        console.log('USER:', user)#}
-{#    })#}
-{#}#}
-{##}
-{#</script>#}
-
-
-
 
 {% endblock %}

@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.core.exceptions import ValidationError
 from django.db import models
 
 
@@ -10,7 +11,7 @@ def validate_cheese(*args):
     VALID_CHEESE = ['mozzarella', 'gorgonzola', 'cheddar', 'parmesan', 'ricotta', 'stracchino']
     for x in new_list:
         if x not in VALID_CHEESE:
-            raise ValueError(f'There is no {x}')
+            raise ValidationError(f'There is no {x}')
 
 
 def validate_meat(*args):
@@ -18,7 +19,7 @@ def validate_meat(*args):
     VALID_MEAT = ['pepperoni', 'chicken', 'prosciutto', 'ham', 'bacon', 'sausage']
     for x in new_list:
         if x not in VALID_MEAT:
-            raise ValueError(f'There is no {x}')
+            raise ValidationError(f'There is no {x}')
 
 
 def validate_add(*args):
@@ -26,7 +27,7 @@ def validate_add(*args):
     VALID_ADD = ['tomatoes', 'olives', 'corn', 'pineapple', 'mushrooms', 'arugula', 'artichoke', 'pickled cucumbers']
     for x in new_list:
         if x not in VALID_ADD:
-            raise ValueError(f'There is no {x}')
+            raise ValidationError(f'There is no {x}')
 
 # discount model
 
@@ -45,8 +46,6 @@ class Pizza(models.Model):
     sauce = models.CharField(
         max_length=max(len(x) for (x, _) in TYPES_SAUCES),
         choices=TYPES_SAUCES,
-        blank=True,
-        null=True,
     )
 
     cheese = models.CharField(
@@ -75,6 +74,8 @@ class Pizza(models.Model):
         blank=True,
         null=True,
     )
+
+    complete = models.BooleanField(default=False, null=True, blank=False)
 
     price = models.CharField(max_length=30, default=13, blank=True, null=True,)
 
@@ -111,7 +112,7 @@ class PizzaItem(models.Model):
 
 
 class Order(models.Model):
-    user = models.ForeignKey(UserModel, on_delete=models.SET_NULL, blank=True, null=True)
+    user = models.ForeignKey(UserModel, on_delete=models.CASCADE, blank=True, null=True)
     date_ordered = models.DateTimeField(auto_now_add=True)
     complete = models.BooleanField(default=False, null=True, blank=False)
 
@@ -129,10 +130,11 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
-    pizza = models.ForeignKey(PizzaItem, on_delete=models.SET_NULL, blank=True, null=True)
-    order = models.ForeignKey(Order, on_delete=models.SET_NULL, blank=True, null=True)
+    pizza = models.ForeignKey(PizzaItem, on_delete=models.CASCADE, blank=True, null=True)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, blank=True, null=True)
     date_added = models.DateTimeField(auto_now_add=True)
     quantity = models.IntegerField(default=0, null=True, blank=True)
+    complete = models.BooleanField(default=False, null=True, blank=False)
 
     @property
     def get_total(self):
@@ -154,30 +156,50 @@ class Drink(models.Model):
 
 
 class OrderD(models.Model):
-    user = models.ForeignKey(UserModel, on_delete=models.SET_NULL, blank=True, null=True)
+    user = models.ForeignKey(UserModel, on_delete=models.CASCADE, blank=True, null=True)
     date_ordered = models.DateTimeField(auto_now_add=True)
     complete = models.BooleanField(default=False, null=True, blank=False)
 
     @property
     def get_order_total(self):
         orderdrink = self.orderdrink_set.all()
-        total = sum([x.get_total_drink for x in orderdrink])
+        total = sum([x.get_total_drink for x in orderdrink if x.get_total_drink])
         return total
 
     @property
     def get_order_items(self):
         orderdrink = self.orderdrink_set.all()
-        total = sum([x.quantity for x in orderdrink])
+        total = sum([x.quantity for x in orderdrink if not x.complete])
         return total
 
 
 class OrderDrink(models.Model):
-    drink = models.ForeignKey(Drink, on_delete=models.SET_NULL, blank=True, null=True)
-    order = models.ForeignKey(OrderD, on_delete=models.SET_NULL, blank=True, null=True)
+    drink = models.ForeignKey(Drink, on_delete=models.CASCADE, blank=True, null=True)
+    order = models.ForeignKey(OrderD, on_delete=models.CASCADE, blank=True, null=True)
     date_added = models.DateTimeField(auto_now_add=True)
     quantity = models.IntegerField(default=0, null=True, blank=True)
+    complete = models.BooleanField(default=False, null=True, blank=False)
 
     @property
     def get_total_drink(self):
-        total = self.drink.price * self.quantity
-        return total
+        if not self.complete:
+            total = self.drink.price * self.quantity
+            return total
+
+
+class OrderInformation(models.Model):
+    total = models.IntegerField(null=True, blank=True)
+    order_number = models.IntegerField(null=True, blank=True)
+    user = models.ForeignKey(UserModel, on_delete=models.CASCADE, blank=True, null=True)
+
+
+class CompleteOrder(models.Model):
+    name = models.CharField(max_length=50, default='Pizza Create', null=True, blank=True)
+    price = models.IntegerField()
+    quantity = models.IntegerField(default=1, null=True, blank=True)
+    total = models.IntegerField(null=True, blank=True)
+    image = models.ImageField(null=True, blank=True)
+    order = models.ForeignKey(OrderInformation, on_delete=models.CASCADE, blank=True, null=True)
+
+
+

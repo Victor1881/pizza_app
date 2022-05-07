@@ -4,7 +4,7 @@
 
     <div class="row">
     <link rel="stylesheet" media="screen" href="{% static 'css/login.css' %}">
-        <div class="col-lg-12">
+     <div class="col-lg-12">
             <div class="box-element">
                 <a href="{% url 'home' %}">&#x2190;Back</a>
                 <br>
@@ -15,7 +15,27 @@
                         <th><h5>Items: <strong>{{ order.get_order_items|add:total_pizza_items|add:d.get_order_items}}</strong></h5></th>
                         <th><h5>Total: <strong>${{ order.get_order_total|add:total|add:d.get_order_total}}</strong></h5></th>
                         <th>
-                            <a style="float: right" class="btn btn-success" href="">Order</a>
+                             <script>
+                                function toPage()
+                                        {
+                                        window.location="http://127.0.0.1:8000/order/receive/";
+                                        }
+                                        function redirectCustom(){
+                                        //redirect after 5 seconds for i min pass 60000
+                                        setTimeout('toPage()', 3000);
+                                        }
+                                 </script>
+
+                        <script type="text/javascript">
+                            function showMessage() {
+                                alert("You don't have orders");
+                            }
+                        </script>
+                            {% if a %}
+                                 <input type="button" name="submit_button" class="btn btn-success" onclick="redirectCustom();" value="Order" style="float: right">
+                            {% else %}
+                                  <input type="button" class="btn btn-success" style="float: right" id="btnShowMsg" value="Order" onClick="showMessage()" />
+                            {% endif %}
                         </th>
                     </tr>
                 </table>
@@ -28,8 +48,8 @@
                     <div style="flex:1">Price</div>
                     <div style="flex:1">Quantity</div>
                     <div style="flex:1">Total</div>
+                    <div style="flex:0.2"></div>
                 </div>
-
                 {% for item in items %}
                         <div class="order-row">
                             <div style="flex:2"><img class="row-image" src="{{ item.pizza.photo.url}}"></div>
@@ -40,49 +60,55 @@
                                 <p class="quantity">{{ item.quantity }}</p>
                             </div>
                             <div style="flex:1">${{ item.get_total }}</div>
-                             <div class="quantity">
-{#                                    <button data-p="{{p.id}}" data-action="add" class="btn add-btn update-drink">-</button><p>#}
-                                    <img data-p="{{ item.pizza.id }}" data-action="remove" class="update-cart" src="{% static 'fonts/images.png' %}" width="30px">
-                            </div>
+                            <div style="flex: 0.2" ><img data-p="{{ item.pizza.id }}" data-action="remove" class="update-cart" src="{% static 'fonts/images.png' %}" width="30px"></div>
+
+
                         </div>
                 {% endfor %}
+               {% for pizza in created_pizza %}
+                            <div class="order-row">
+                                <div style="flex:2"><img class="row-image" src="https://www.nicepng.com/png/detail/856-8564767_pizza-different-slices-of-pizza.png"></div>
+                                <div style="flex:2">Pizza Create</div>
+        {#                        <div style="flex:1">{{ item.date_added }}</div>#}
+                                <div style="flex:1">${{ pizza.price }}</div>
+                                <div style="flex:1">
+                                    <p class="quantity">1</p>
+                                </div>
+                                <div style="flex:1">${{ pizza.price }}</div>
+                                <div style="flex: 0.2" ><a href="{% url 'delete' pizza.id %}"><img src="{% static 'fonts/images.png' %}" width="30px"></a></div>
 
-                {% for pizza in created_pizza %}
-                    <div class="order-row">
-                            <div style="flex:2"><img class="row-image" src="https://www.nicepng.com/png/detail/856-8564767_pizza-different-slices-of-pizza.png"></div>
-                            <div style="flex:2">Pizza Create</div>
-    {#                        <div style="flex:1">{{ item.date_added }}</div>#}
-                            <div style="flex:1">${{ pizza.price }}</div>
-                            <div style="flex:1">
-                                <p class="quantity">1</p>
                             </div>
-                            <div style="flex:1">$13</div>
-                            <div class="quantity">
-                                <img src="{% static 'fonts/images.png' %}" width="30px">
-                            </div>
-                    </div>
-                {% endfor %}
-
-                {% for dr in drinks %}
-                    <div class="order-row">
-                            <div style="flex:2"><img class="row-image" src="{{ dr.drink.photo.url }}"></div>
-                            <div style="flex:2">{{ dr.drink.name }}</div>
-    {#                        <div style="flex:1">{{ item.date_added }}</div>#}
-                            <div style="flex:1">${{ dr.drink.price }}</div>
-                            <div style="flex:1">
-                                <p class="quantity">{{ dr.quantity }}</p>
-                            </div>
-                            <div style="flex:1">$13</div>
-                             <div class="quantity">
-{#                                    <button data-p="{{p.id}}" data-action="add" class="btn add-btn update-drink">-</button><p>#}
-                                    <img data-d="{{ dr.drink.id }}" data-action="remove" class="update-drink" src="{% static 'fonts/images.png' %}" width="30px">
-                            </div>
-                        </div>
-                {% endfor %}
+                    {% endfor %}
+                  </div>
             </div>
-        </div>
+            <br>
+            <div class="col-lg-12">
+            <br>
+            <div class="box-element">
+                <div class="order-row">
+                    <div style="flex:2"></div>
+                    <div style="flex:2">Drinks</div>
+                    <div style="flex:1">Price</div>
+                    <div style="flex:1">Quantity</div>
+                    <div style="flex:1">Total</div>
+                    <div style="flex:0.2"></div>
+                </div>
+                {% for d in drinks %}
+                        <div class="order-row">
+                            <div style="flex:2"><img class="row-image" src="{{ d.drink.photo.url}}"></div>
+                            <div style="flex:2">{{ d.drink.name }}</div>
+    {#                        <div style="flex:1">{{ item.date_added }}</div>#}
+                            <div style="flex:1">${{ d.drink.price }}</div>
+                            <div style="flex:1">
+                                <p class="quantity">{{ d.quantity }}</p>
+                            </div>
+                            <div style="flex:1">${{ d.get_total_drink }}</div>
+                            <div style="flex: 0.2"><img data-d="{{ d.drink.id }}" data-action="remove" class="update-drink" src="{% static 'fonts/images.png' %}" width="30px"></div>
+
+                        </div>
+                {% endfor %}
+            </div></div>
     </div>
 
-{% endblock start %}
 
-<script type="text/javascript" src="{% static 'js/drink.js' %}"></script>
+{% endblock start %}
