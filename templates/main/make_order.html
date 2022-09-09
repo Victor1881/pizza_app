@@ -36,7 +36,7 @@
               <li><a href="{% url 'register' %}">SignUp</a></li>
             {% endif %}
             <li><a href="{% url 'home' %}">Home</a></li>
-            <li><a href="{% url 'home' %}">Profile</a></li>
+            <li><a href="{% url 'profile' request.user.id %}">Profile</a></li>
             <li><a href="{% url 'orders' %}">Orders</a></li>
         </ul>
       </div>

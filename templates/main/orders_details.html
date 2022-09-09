@@ -30,7 +30,6 @@
             {% if request.user.is_authenticated  %}
                 <li><a href="{% url 'home' %}">Home</a></li>
                 <li><a href="{% url 'profile' request.user.id %}">Profile</a></li>
-                <li><a href="{% url 'orders' %}">Orders</a></li>
             {% else %}
               <li><a href="{% url 'login' %}">Login</a></li>
               <li><a href="{% url 'register' %}">SignUp</a></li>
@@ -47,6 +46,8 @@
         <div class="col-lg-12">
             <div class="box-element">
                 <a href="{% url 'total orders' %}">&#x2190;Back</a>
+                <a href="{% url 'reorder' id %}" type="button"  class="btn btn-success" style="right: -85%; top: 20px; position: relative">Reorder</a>
+
                 <br>
                 <br>
 

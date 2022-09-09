@@ -10,17 +10,15 @@ from pizza_app.accounts.forms import CreateProfileForm, EditProfileForm, DeleteP
 from pizza_app.accounts.models import Profile, ProfileUser
 from django.contrib.auth import update_session_auth_hash
 
-from pizza_app.home.models import Pizza, OrderInformation, CompleteOrder
-
 
 class UserRegisterView (views.CreateView):
     form_class = CreateProfileForm
-    template_name = 'profile_create.html'
+    template_name = 'users/profile_create.html'
     success_url = reverse_lazy('home')
 
 
 class UserLoginView(auth_views.LoginView):
-    template_name = 'login.html'
+    template_name = 'users/login.html'
 
     def get_success_url(self):
         return reverse_lazy('home')
@@ -28,7 +26,7 @@ class UserLoginView(auth_views.LoginView):
 
 class UserRegistrationView(views.CreateView):
     form_class = CreateProfileForm
-    template_name = 'profile_create.html'
+    template_name = 'users/profile_create.html'
     success_url = reverse_lazy('home')
 
     def form_valid(self, form):
@@ -45,7 +43,7 @@ class UserLogoutView(auth_views.LogoutView):
 
 class ProfileDetailsView(views.DetailView):
     model = Profile
-    template_name = 'profile_details.html'
+    template_name = 'users/profile_details.html'
     context_object_name = 'profile'
 
     def get_context_data(self, **kwargs):
@@ -63,13 +61,13 @@ class ProfileDetailsView(views.DetailView):
 
 
 class ChangeUserPasswordView(auth_views.PasswordChangeView):
-    template_name = 'change_password.html'
+    template_name = 'users/change_password.html'
     success_url = reverse_lazy("home")
 
 
 class EditProfileDetails(views.UpdateView):
     model = Profile
-    template_name = 'edit_profile.html'
+    template_name = 'users/edit_profile.html'
     form_class = EditProfileForm
 
     def get_context_data(self, **kwargs):
@@ -100,7 +98,7 @@ def delete_profile(request, pk):
             'profile': profile,
             'is_owner': profile.id == request.user.id
         }
-        return render(request, 'delete_profile.html', context)
+        return render(request, 'users/delete_profile.html', context)
     # else:
     #     return redirect('home')
 

@@ -31,7 +31,7 @@
                                 alert("You don't have orders");
                             }
                         </script>
-                            {% if a %}
+                            {% if is_zero %}
                                  <input type="button" name="submit_button" class="btn btn-success" onclick="redirectCustom();" value="Order" style="float: right">
                             {% else %}
                                   <input type="button" class="btn btn-success" style="float: right" id="btnShowMsg" value="Order" onClick="showMessage()" />
