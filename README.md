@@ -24,7 +24,7 @@ The Pizza App is a Django-based web application that allows users to create, ord
 <h1> Technical Details </h1>
 
 <h4>● The application uses a PostgreSQL database to store user profiles, pizzas, orders, and related data.</h4> 
-<h4>●It leverages Django's built-in user authentication system and extends it with a custom ProfileUser model.</h4> 
+<h4>● It leverages Django's built-in user authentication system and extends it with a custom ProfileUser model.</h4> 
 <h4>● The app utilizes Django's class-based views for handling user registration, login, and CRUD operations.</h4> 
 <h4>● Form validation is implemented using Django's built-in form classes and custom validators.</h4> 
 <h4>● The application follows a model-template-view (MTV) architecture, separating concerns for modularity and maintainability.</h4> 
